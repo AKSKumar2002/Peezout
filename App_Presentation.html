@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUBO App - Client Presentation</title>
+    <style>
+        :root {
+            --primary-bg: #000000;
+            --card-bg: #111111;
+            --accent-gold: #FFD700;
+            --text-main: #FFFFFF;
+            --text-secondary: #AAAAAA;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #555; /* Grey background for viewing the A4 pages */
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background-color: var(--primary-bg);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+            padding: 40px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media print {
+            body {
+                background-color: var(--primary-bg);
+                padding: 0;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                page-break-after: always;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        h1 {
+            color: var(--accent-gold);
+            font-size: 48px;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: var(--accent-gold);
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--accent-gold);
+            padding-left: 15px;
+        }
+
+        p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* Components */
+        .cover-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo-placeholder {
+            width: 150px;
+            height: 150px;
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: var(--accent-gold);
+            margin-bottom: 40px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .screenshot-container {
+            border: 1px dashed var(--accent-gold);
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .screenshot-container img {
+            max-width: 100%;
+            max-height: 450px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .screenshot-label {
+            margin-top: 15px;
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: 'â—†';
+            color: var(--accent-gold);
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: auto;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .instruction-banner {
+            background-color: #222;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--accent-gold);
+            max-width: 800px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="instruction-banner no-print">
+        <h3>âš ï¸  Instructions for PDF Generation</h3>
+        <ol style="text-align: left;">
+            <li>Run your app on a device or emulator.</li>
+            <li>Take screenshots of: <b>Home Screen</b>, <b>Game Arena</b>, <b>Profile/Wallet</b>.</li>
+            <li>Rename them to: <code>home.png</code>, <code>games.png</code>, <code>wallet.png</code>.</li>
+            <li>Place them in the folder: <code>assets/screenshots/</code> inside your project.</li>
+            <li>Refresh this page. The images will appear automatically.</li>
+            <li>Right-click -> <b>Print...</b> -> Select <b>"Save as PDF"</b>.</li>
+        </ol>
+    </div>
+
+    <!-- Page 1: Cover -->
+    <div class="page">
+        <div class="cover-content">
+            <div class="logo-placeholder">Q</div>
+            <h1>QUBO</h1>
+            <p style="font-size: 24px; letter-spacing: 5px;">PREMIUM REFERRAL APP</p>
+            <div style="width: 100px; height: 2px; background: var(--accent-gold); margin: 30px auto;"></div>
+            <p>DESIGN SPECIFICATION & PROGRESS REPORT</p>
+            <p>December 2025</p>
+        </div>
+        <div class="footer">
+            <span>QUBO Mobile Application</span>
+            <span>Confidential</span>
+        </div>
+    </div>
+
+    <!-- Page 2: Overview & Home -->
+    <div class="page">
+        <h1>Dashboard & UX</h1>
+        <p>The core of QUBO is a premium, high-contrast dashboard designed to maximize user engagement. The "Obsidian & Gold" theme establishes immediate value.</p>
+        
+        <div class="grid">
+            <div>
+                <h2>Key Features</h2>
+                <ul class="feature-list">
+                    <li><b>Live Wallet Balance:</b> Prominent display with metallic gradient typography.</li>
+                    <li><b>Task Progress:</b> Visual referral tracking (1/6, 6/12) with locked/unlocked states.</li>
+                    <li><b>Smart Navigation:</b> Quick access to Games, Tasks, and Settings.</li>
+                    <li><b>Premium Aesthetics:</b> Dark mode exclusive design with glassmorphism effects.</li>
+                </ul>
+            </div>
+            <div class="screenshot-container">
+                <!-- Expects home.png -->
+                <img src="assets/screenshots/home.png" alt="Home Screen Screenshot" onerror="this.style.display='none'; this.parentElement.innerHTML+='<p style=\'color:red\'>Missing: assets/screenshots/home.png</p>'">
+                <div class="screenshot-label">Home Dashboard</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>Page 1</span>
+            <span>QUBO Design Document</span>
+        </div>
+    </div>
+
+    <!-- Page 3: Gaming Arena -->
+    <div class="page">
+        <h1>The Game Arena</h1>
+        <p>A gamified earning ecosystem with 3 distinct engagement modules. Games unlock sequentially to drive retention.</p>
+        
+        <div class="grid">
+            <div class="screenshot-container">
+                <!-- Expects games.png -->
+                <img src="assets/screenshots/games.png" alt="Games Screen Screenshot" onerror="this.style.display='none'; this.parentElement.innerHTML+='<p style=\'color:red\'>Missing: assets/screenshots/games.png</p>'">
+                <div class="screenshot-label">Task & Game Selection</div>
+            </div>
+            <div>
+                <h2>Included Games</h2>
+                <ul class="feature-list">
+                    <li><b>Spin the Wheel:</b> 3D-styled physics-based wheel with segment rewards.</li>
+                    <li><b>Puzzle Solver:</b> Logic-based tile game. Unlocks after Wheel tasks.</li>
+                    <li><b>Scratch Card:</b> Gold foil effect with "Scratch to Win" mechanics. Unlocks after Puzzle.</li>
+                </ul>
+                <p><i>All games feature haptic feedback and particle effects on win states.</i></p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>Page 2</span>
+            <span>QUBO Design Document</span>
+        </div>
+    </div>
+
+    <!-- Page 4: Wallet & Profile -->
+    <div class="page">
+        <h1>User Profile & Wallet</h1>
+        <p>Transparency is key. The Wallet section provides a clear breakdown of earnings and referral commissions.</p>
+        
+        <div class="grid">
+            <div>
+                <h2>Financial Features</h2>
+                <ul class="feature-list">
+                    <li><b>Referral Commission:</b> 20% earning on referred user deposits.</li>
+                    <li><b>Transaction History:</b> Detailed list of earnings and withdrawals.</li>
+                    <li><b>Withdrawal Request:</b> Seamless gateway to request payouts.</li>
+                    <li><b>Secure Data:</b> Profile management with encrypted user data handling.</li>
+                </ul>
+            </div>
+            <div class="screenshot-container">
+                <!-- Expects wallet.png -->
+                <img src="assets/screenshots/wallet.png" alt="Wallet Screen Screenshot" onerror="this.style.display='none'; this.parentElement.innerHTML+='<p style=\'color:red\'>Missing: assets/screenshots/wallet.png</p>'">
+                <div class="screenshot-label">Wallet & Earnings</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>Page 3</span>
+            <span>QUBO Design Document</span>
+        </div>
+    </div>
+
+</body>
+</html>
